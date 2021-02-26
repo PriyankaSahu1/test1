@@ -1,7 +1,8 @@
-FROM node:latest
-WORKDIR /usr/src/app
-COPY ./package*.json /usr/src/app/
-RUN npm install
-COPY ./ /usr/src/app/
+FROM node:latest as node
+RUN mkdir -p /app
+WORKDIR /app
+COPY package*.json /app/
+RUN npm install 
+COPY . /app/
 EXPOSE 3000
-CMD [ "npm", "start" ]
+CMD ["npm", "start"]
